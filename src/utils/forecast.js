@@ -13,8 +13,10 @@ const forecast = (latitude, longitude, callback) => {
     } else if (body.error) {
       callback(body.error);
     } else {
+      console.log('weather data: ', body)
       const currentTemp = body.currently.temperature;
       const chanceRain = body.currently.precipProbability;
+      const wind = body.currently.windSpeed
       callback(
         undefined,
         body.daily.data[0].summary +
@@ -22,7 +24,7 @@ const forecast = (latitude, longitude, callback) => {
           currentTemp +
           " degrees. There is " +
           chanceRain +
-          "% chance of rain."
+          "% chance of rain. The current wind speed is " + wind + " knots"
       );
     }
   });
